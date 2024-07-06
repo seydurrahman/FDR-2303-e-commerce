@@ -40,3 +40,7 @@
         color: var(--secondary_font_color);
 }
 }
+
+/* .slick-dots ul .slick-active div{
+    border-right: 3px solid var(--main_font_color) !important;
+} */
