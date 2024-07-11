@@ -1,6 +1,6 @@
 import React from 'react'
-import Logo from "../../assets/Logo.png"
-import Flex from '../CommonComponent/Flex'
+import Logo from "../../../assets/Logo.png"
+import Flex from '../../CommonComponent/Flex'
 const Header = () => {
   return (
     <>

@@ -1,6 +1,6 @@
 import React from 'react'
-import Flex from "../CommonComponent/Flex"
-import ShippingItem from '../CommonComponent/ShippingItem'
+import Flex from "../../CommonComponent/Flex"
+import ShippingItem from '../../CommonComponent/ShippingItem'
 import { FaTruck } from "react-icons/fa6";
 
 const Shipping = () => {

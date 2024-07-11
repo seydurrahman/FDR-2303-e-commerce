@@ -1,5 +1,5 @@
 import React from 'react'
-import Flex from "../CommonComponent/Flex";
+import Flex from "../CommonComponent/Flex"
 import { FcSearch } from "react-icons/fc";
 
 const Search = ({placeHolder}) => {

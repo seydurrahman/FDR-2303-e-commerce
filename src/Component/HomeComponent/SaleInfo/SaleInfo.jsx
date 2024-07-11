@@ -1,9 +1,9 @@
 import React from 'react'
-import Flex from '../CommonComponent/Flex'
-import Saleleft from "../../assets/Saleleft.png"
-import Electronicwatch from "../../assets/Electronicwatch.png"
-import Furniture from "../../assets/Furniture.png"
-import Overlay from '../CommonComponent/Overlay.jsx'
+import Flex from '../../CommonComponent/Flex.jsx'
+import Saleleft from "../../../assets/Saleleft.png"
+import Electronicwatch from "../../../assets/Electronicwatch.png"
+import Furniture from "../../../assets/Furniture.png"
+import Overlay from '../../CommonComponent/Overlay.jsx'
 const SaleInfo = () => {
   return (
     <>
@@ -28,7 +28,7 @@ const SaleInfo = () => {
                         <picture>
                             <img src={Furniture} alt={Furniture} />
                         </picture>
-                        <Overlay className={" top-1/2 -translate-y-1/2 left-16"} title="Furniture offer" discountDetailsFirst="Up to" discountDetailsLast={`sales for all furniture item!`} discountAmount="50%" btnTitle ="Shop now"/>
+                        <Overlay className={" top-1/2 -translate-y-1/2 left-16"} title="Furniture offer" discountDetailsFirst="Up to" discountDetailsLast={`sales for all furniture item!`} discountAmount="50%" btnTitle ="Shop"/>
                     </div>
                 </Flex>
             </div>

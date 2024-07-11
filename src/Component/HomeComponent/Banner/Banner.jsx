@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import BannerImage from "../../assets/Banner.png"
+import BannerImage from "../../../assets/Banner.png"
 import "slick-carousel/slick/slick.css";
 import Slider from "react-slick";
 

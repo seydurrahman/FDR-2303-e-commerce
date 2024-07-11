@@ -1,7 +1,7 @@
 import React from 'react'
 import { HiMiniBars3BottomLeft } from "react-icons/hi2";
-import Flex from "../CommonComponent/Flex"
-import Search from '../CommonComponent/Search';
+import Flex from "../../CommonComponent/Flex"
+import Search from '../../CommonComponent/Search';
 import { FaUser } from "react-icons/fa";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { IoCartOutline } from "react-icons/io5";
