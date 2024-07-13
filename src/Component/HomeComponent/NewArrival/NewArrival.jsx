@@ -57,7 +57,7 @@ const NewArrival = ({headdingTitle,pdata}) => {
     <>
     <div className=' py-[128px]'>
       <div className="container">
-      <h1 className=' font-bold font-DMsans text-main_font_color text-[29px]'>{headdingTitle?headdingTitle:"Title Missing"}</h1>
+      <h1 className=' font-bold font-DMsans text-main_font_color text-[29px] mb-12'>{headdingTitle?headdingTitle:"Title Missing"}</h1>
           <Slider {...settings}>
           {Allproduct?.map((item)=>(
          <div key={item.id}>

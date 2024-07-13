@@ -6,7 +6,7 @@ import { FaTruck } from "react-icons/fa6";
 const Shipping = () => {
   return (
     <>
-    <div>
+    <div className='mt-5'>
         <div className="container">
             <Flex className={"justify-between items-center"}>
                 {[...Array(3)].map((_, index)=>(

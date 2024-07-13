@@ -6,7 +6,9 @@ import Shipping from '../../Component/HomeComponent/Shipping/Shipping'
 import SaleInfo from "../../Component/HomeComponent/SaleInfo/SaleInfo"
 import NewArrival from '../../Component/HomeComponent/NewArrival/NewArrival'
 import PhoneoftheYear from '../../Component/HomeComponent/PhoneoftheYear/PhoneoftheYear'
-import { ProductData ,BestSellingProduct} from '../../../Data/Data'
+import Footer from '../../Component/CommonComponent/Footer/Footer'
+import { ProductData ,BestSellingProduct,SpecialOffers} from '../../../Data/Data'
+
 const Home = () => {
   return (
     <div>
@@ -18,6 +20,8 @@ const Home = () => {
         <NewArrival headdingTitle={"New Arrival"} pdata={ProductData}/>
         <NewArrival headdingTitle={"Our best selling"} pdata={BestSellingProduct}/>
         <PhoneoftheYear/>
+        <NewArrival headdingTitle={"Special Offers"} pdata={SpecialOffers}/>
+        <Footer/>
     </div>
   )
 }

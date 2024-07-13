@@ -12,7 +12,7 @@ const MenuBar = () => {
     <>
     <div className=' bg-secondary_bg_color py-6'>
         <div className="container">
-            <Flex className={"gap-x-3 justify-between"}>
+            <Flex className={"gap-x-3 justify-between items-center"}>
                 <Flex className={"gap-x-2"}>
                 <HiMiniBars3BottomLeft className=' text-2xl'/>
                 <h2 className=' menuItem cursor-pointer text-main_font_color'>Shop by Category</h2>
