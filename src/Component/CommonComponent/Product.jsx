@@ -6,15 +6,15 @@ import { IoIosGitCompare } from "react-icons/io";
 import { IoCart } from "react-icons/io5";
 import { ProductData } from '../../../Data/Data';
 
-const Product = ({colorVariant,badge}) => {
+const Product = ({colorVariant,badge,imga}) => {
   return (
-    <div className=' w-full'>
+    <div className=' w-[98%]'>
        <div className=' pb-6 relative overflow-hidden group cursor-pointer'>
         <div className=' absolute top-4 left-4 rounded-sm'>
              {badge}
         </div>
        <picture>
-            <img src={product1} alt={product1} />
+            <img src={imga} alt={imga} className='w-full h-full object-cover' />
         </picture>
         <div className=" absolute bg-purple-100 w-full -bottom-[35%] left-0 transition-all group-hover:bottom-6">
             <div className=' flex justify-end flex-col items-end p-6'>

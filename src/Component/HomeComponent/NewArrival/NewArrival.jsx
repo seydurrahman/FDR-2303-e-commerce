@@ -1,22 +1,70 @@
 import React, { useState } from 'react'
 import Product from '../../CommonComponent/Product'
 import Button from '../../CommonComponent/Button'
-import { ProductData } from '../../../../Data/Data'
 import Flex from '../../CommonComponent/Flex'
-const NewArrival = () => {
-  const [Allproduct, setAllproduct]=useState(ProductData)
+import Slider from "react-slick";
+import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
+
+
+// SampleNextArrow//
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "block", background: "#979797", width:"40px", height:"40px", borderRadius:"50%", position:"absolute", left:"-20px", top:"50%", transform:"translateY(-100%)", zIndex:"2", cursor:"pointer",}}
+      onClick={onClick}
+    >
+      <div className=' flex items-center justify-center h-full'>
+        <FaLongArrowAltLeft className=' text-white'/>
+      </div>
+      </div>
+  );
+}
+
+// SamplePrevArrow//
+
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "block", background: "#979797",width:"40px", height:"40px", borderRadius:"50%", position:"absolute", right:"-15px", top:"50%", transform:"translateY(-100%)", zIndex:"2", cursor:"pointer", }}
+      onClick={onClick}
+    >
+       <div className=' flex items-center justify-center h-full'>
+        <FaLongArrowAltRight className=' text-white'/>
+      </div>
+      </div>
+  );
+}
+
+const settings = {
+  dots:false,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 4,
+  slidesToScroll: 4,
+  arrows:true,
+  prevArrow: <SampleNextArrow/>,
+  nextArrow: <SamplePrevArrow />,
+};
+
+
+const NewArrival = ({headdingTitle,pdata}) => {
+  const [Allproduct, setAllproduct]=useState(pdata)
   return (
     <>
     <div className=' py-[128px]'>
       <div className="container">
-      <h1 className=' font-bold font-DMsans text-main_font_color text-[29px]'>New Arrival</h1>
-        <div className=' flex justify-between'> 
-        {Allproduct?.map((item)=>(
+      <h1 className=' font-bold font-DMsans text-main_font_color text-[29px]'>{headdingTitle?headdingTitle:"Title Missing"}</h1>
+          <Slider {...settings}>
+          {Allproduct?.map((item)=>(
          <div key={item.id}>
-                <Product colorVariant={item.color===true?true:false} badge={item.badge==true?<Button title={"10%"} className={"py-2 px-8 bg-black text-white"}/>:null}/>
+                <Product imga={item.img} colorVariant={item.color===true?true:false} badge={item.badge==true?<Button title={item.badgeElement==true? "New":item.discountOffer} className={"py-2 px-8 bg-black text-white"}/>:null}/>
         </div>
       ))}
-        </div>      
+          </Slider>
       </div>
     </div>
     </>
