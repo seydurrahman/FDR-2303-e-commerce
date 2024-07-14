@@ -10,17 +10,17 @@ import { IoCartOutline } from "react-icons/io5";
 const MenuBar = () => {
   return (
     <>
-    <div className=' bg-secondary_bg_color py-6'>
+    <div className=' bg-secondary_bg_color py-6 px-4 sm:px-0'>
         <div className="container">
             <Flex className={"gap-x-3 justify-between items-center"}>
                 <Flex className={"gap-x-2"}>
                 <HiMiniBars3BottomLeft className=' text-2xl'/>
-                <h2 className=' menuItem cursor-pointer text-main_font_color'>Shop by Category</h2>
+                <h2 className='hidden md:block menuItem cursor-pointer text-main_font_color'>Shop by Category</h2>
                 </Flex>
                 <Search placeHolder="Search product"/>
 
-                <Flex className={"gap-x-5"}>
-                <Flex className={"gap-x-2"}>
+                <Flex className={"gap-x-2 sm:gap-x-5"}>
+                <Flex className={"gap-x-1 sm:gap-x-2"}>
                     <div>
                         <FaUser/>
                     </div>
