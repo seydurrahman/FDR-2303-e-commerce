@@ -78,10 +78,10 @@ const MenuBar = () => {
                 {showAccount && (<div>
                     <ul className='w-full sm:w-[200px] left-0 top-[185px] z-10 text-center  bg-gray-700 absolute text-white py-5 divide-y divide-solid'>
                         <li className='py-4'>
-                            <a href="#">My Account</a>
+                            <Link to={"/"}>My Account</Link>
                         </li>
                         <li className='PY-4'>
-                            <a href="#">Log Out</a>
+                            <Link to={"/"}>Log Out</Link>
                         </li>
                     </ul>
                 </div>) 
@@ -91,7 +91,7 @@ const MenuBar = () => {
                 <div className='cursor-pointer' onClick={handleCart1}>
                     <IoCartOutline/>
                 </div>
-                <div className=' bg-black text-white absolute top-[100px] left-0 w-full sm:w-fit'>
+                <div className=' bg-black text-white absolute top-[0px] left-0 w-full sm:w-fit'>
                     <div className='w-[80px] h-[80px] object-cover'>
                         <img src={cartItem} alt={cartItem} />
                     </div>
