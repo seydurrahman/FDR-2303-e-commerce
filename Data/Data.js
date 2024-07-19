@@ -67,3 +67,49 @@ export const SpecialOffers=[
     },
     
 ]
+
+export const categories = [
+    
+    {id:1, title:"Mobile", 
+    subcategories:[
+        {id:1, title:"Xiomi"},
+        {id:2, title:"Nokia"},
+        {id:3, title:"Vovo"},
+        {id:4, title:"Samsung"},
+        ]
+    },
+
+    {id:2, title:"Apple",  
+    subcategories:[
+        {id:1, title:"I-phone1"},
+        {id:2, title:"I-phone2"},
+        {id:3, title:"I-phone3"},
+        {id:4, title:"I-phone4"},
+            
+        ]
+    },
+
+    {id:3, title:"Desktop", 
+    subcategories:[
+        {id:1, title:"Ausus"},
+        {id:2, title:"Intel"},
+        {id:3, title:"MBM"},
+        ]
+    },
+
+    {id:4, title:"Accessories", 
+    subcategories:[
+                
+        ]
+    },
+    
+    {id:5, title:"Cloths", 
+    subcategories:[
+        {id:1, title:"Mens"},
+        {id:2, title:"Womens"},
+        {id:3, title:"Baby"},
+
+        ]
+    },
+    
+    ]
