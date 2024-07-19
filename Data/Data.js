@@ -121,3 +121,19 @@ export const shopByColor =[
     {id:1, colorCode:"#b6b6b6", title:"Gray"},
     {id:1, colorCode:"#15cba5", title:"Green"},
 ]
+
+export const shopByBrand =[
+    {id:1, title:"Apex"},
+    {id:1, title:"Apple"},
+    {id:1, title:"Samsung"},
+    {id:1, title:"HP"},
+    {id:1, title:"Hewlet"},
+]
+
+export const shopByPrice =[
+    {id:1, title:"$00-$9.99"},
+    {id:1, title:"$1-$19.99"},
+    {id:1, title:"$20-$29.99"},
+    {id:1, title:"$30-$39.99"},
+    {id:1, title:"$40-$49.99"},
+]
