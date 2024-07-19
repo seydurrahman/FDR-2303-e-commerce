@@ -113,3 +113,11 @@ export const categories = [
     },
     
     ]
+
+export const shopByColor =[
+    {id:1, colorCode:"#000000", title:"Black"},
+    {id:1, colorCode:"#ff8686", title:"Pink"},
+    {id:1, colorCode:"#7ed321", title:"Green"},
+    {id:1, colorCode:"#b6b6b6", title:"Gray"},
+    {id:1, colorCode:"#15cba5", title:"Green"},
+]
