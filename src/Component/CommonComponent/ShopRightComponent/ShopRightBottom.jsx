@@ -5,8 +5,11 @@ import Button from '../Button'
 import axios from 'axios'
 import { ShopRightPageNumberContext } from '../../ShopComponent/ShopRight/ShopRight.jsx'
 import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight} from 'react-icons/md'
+import { setProducts } from '../../../Redux/AllSlice/ProductSlice/ProductSlice.js'
+import { useSelector, useDispatch } from 'react-redux'
 
 const ShopRightBottom = () => {
+  const dispatch = useDispatch()
   const value = useContext(ShopRightPageNumberContext)
     const [allProducts, setallProducts]=useState([])
      const [page, setpage]=useState(1)
@@ -16,6 +19,9 @@ const ShopRightBottom = () => {
         const ProductDataFetcher= async () => {
             const products = await axios.get("https://dummyjson.com/products")
             setallProducts(products.data.products);
+
+            // set data on Redux //
+          dispatch(setProducts(products.data.products))
         }
         ProductDataFetcher()
     },[])
@@ -28,6 +34,7 @@ const ShopRightBottom = () => {
       }
      
     }
+
 
   return (
     <>
