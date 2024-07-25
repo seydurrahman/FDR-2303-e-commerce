@@ -6,15 +6,16 @@ import { IoIosGitCompare } from "react-icons/io";
 import { IoCart } from "react-icons/io5";
 import { ProductData } from '../../../Data/Data';
 
-const Product = ({colorVariant,badge,imga}) => {
+const Product = ({colorVariant,badge,imga,productName,productPrice}) => {
   return (
     <div className=' w-[98%]'>
-       <div className=' pb-6 relative overflow-hidden group cursor-pointer'>
+       <div className=' pb-6 relative overflow-hidden sm:w-[95%] md:w-full group cursor-pointer'>
         <div className=' absolute top-4 left-4 rounded-sm'>
              {badge}
         </div>
+        
        <picture>
-            <img src={imga} alt={imga} className='w-full h-full object-cover' />
+            <img src={imga} alt={imga} className='w-full h-[290px] object-cover' />
         </picture>
         <div className=" absolute bg-purple-100 w-full -bottom-[35%] left-0 transition-all group-hover:bottom-6">
             <div className=' flex justify-end flex-col items-end p-6'>
@@ -40,8 +41,8 @@ const Product = ({colorVariant,badge,imga}) => {
         </div>
        </div>
        <Flex className={"justify-between"}>
-        <h1>Basic crew neck tee</h1>
-        <p>$44.00</p>
+        <h1>{productName ? productName:"Basic crew neck tee"}</h1>
+        <p>{productPrice ? `$${productPrice}`:"$44.00"}</p>
        </Flex>
        {colorVariant && <span>Black</span>}
     </div>

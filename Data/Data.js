@@ -137,3 +137,11 @@ export const shopByPrice =[
     {id:1, title:"$30-$39.99"},
     {id:1, title:"$40-$49.99"},
 ]
+
+export const SortBy =[
+    {id:1, shortItem:"Cloths"},
+    {id:2, shortItem:"Electronics"},
+    {id:3, shortItem:"Watch"},
+    {id:4, shortItem:"Womens"},
+  
+]
