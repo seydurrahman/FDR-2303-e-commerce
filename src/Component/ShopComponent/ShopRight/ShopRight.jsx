@@ -6,15 +6,28 @@ export const ShopRightPageNumberContext = createContext()
 
 const ShopRight = ({className}) => {
   const [perPageItem, setperPageItem]=useState(9)
+  const [GridLayout, setGridLayout]=useState(false)
     
     // handlePageOption function //
     const handlePageOption=(e)=>{
         setperPageItem(e.target.value);
     }
+
+     // handleChangelayout //
+     const handleChangelayout =()=>{
+      setGridLayout(!GridLayout)
+    }
+
+const shopRightBottomItem={
+  perPageItem, GridLayout,
+}
   
   return <div className={className}>
-      <ProductRightTop onpageItem={handlePageOption}/>
-    <ShopRightPageNumberContext.Provider value={perPageItem}>
+      <ProductRightTop 
+      onpageItem={handlePageOption} 
+      onChangelayout = {handleChangelayout}
+      changeIcon = {GridLayout}/>
+    <ShopRightPageNumberContext.Provider value={shopRightBottomItem}>
       <ShopRightBottom/>
     </ShopRightPageNumberContext.Provider>
   </div>

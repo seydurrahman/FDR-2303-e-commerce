@@ -5,15 +5,16 @@ import {SortBy} from "../../../../Data/Data.js"
 import Flex from '../Flex.jsx'
 import { BiSolidUpArrow, BiSolidDownArrow } from 'react-icons/bi'
 
-const ProductRightTop = ({onpageItem}) => {
+const ProductRightTop = ({onpageItem, onChangelayout, changeIcon}) => {
     const [sortProduct, setsortProduct]=useState(SortBy)
     
 
   return (
     
     <Flex className={"items-center justify-between"}>
-        <div>
-            <BsFillGrid3X3GapFill className='text-2xl'/>
+        <div onClick={onChangelayout}>
+            {changeIcon ? (<FaBars/>):(<BsFillGrid3X3GapFill className='text-2xl cursor-pointer'/>)}
+            
         </div>
         <div className='flex gap-x-7'>
         <div>
