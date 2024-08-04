@@ -7,6 +7,8 @@ import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight} from 'react-icon
 import { FetcherProduct } from '../../../Redux/AllSlice/ProductSlice/ProductSlice.js'
 import { useSelector, useDispatch } from 'react-redux'
 import { data } from 'autoprefixer'
+import { Link } from 'react-router-dom'
+import Loading from '../Loading.jsx'
 
 const ShopRightBottom = () => {
   const dispatch = useDispatch()
@@ -17,21 +19,21 @@ const ShopRightBottom = () => {
 
 
     useEffect(() => {
-        dispatch(FetcherProduct())
+        dispatch(FetcherProduct("https://dummyjson.com/products"))
     },[])
 
   const {data, status} = useSelector((state)=>state.productt)
 
   useEffect(()=>{
     if (status.payload === "IDLE"){
-      setallProducts(data.payload)
+      setallProducts(data.payload.products)
     }
   },[status.payload, data.payload])
 
     // handlePagination functionality //
 
     const handlePagination= (pageNumber)=>{
-      if (pageNumber >0 && pageNumber <= Math.floor(allProducts.length/value)+1){
+      if (pageNumber >0 && pageNumber <= Math.floor(allProducts.length/perPageItem)+1){
         setpage(pageNumber)
       }
     }
@@ -40,23 +42,7 @@ const ShopRightBottom = () => {
     <>
     <div className='mt-10'>
       {status.payload == "LOADING" ? (
-          <div className='flex justify-center items-center h-[100vh]'>
-<div class="border border-blue-300 shadow rounded-md p-4 max-w-sm w-full mx-auto">
-  <div class="animate-pulse flex space-x-4">
-    <div class="rounded-full bg-slate-700 h-10 w-10"></div>
-    <div class="flex-1 space-y-6 py-1">
-      <div class="h-2 bg-slate-700 rounded"></div>
-      <div class="space-y-3">
-        <div class="grid grid-cols-3 gap-4">
-          <div class="h-2 bg-slate-700 rounded col-span-2"></div>
-          <div class="h-2 bg-slate-700 rounded col-span-1"></div>
-        </div>
-        <div class="h-2 bg-slate-700 rounded"></div>
-      </div>
-    </div>
-  </div>
-</div>
-          </div>
+          <Loading className={"w-[33%]"} perItem ={9}/>
       ): status.payload === "ERROR" ? (
         <h1 className='flex justify-center items-center h-[100vh] bg-red-200 text-white'>Error page 404</h1>
       ):(
@@ -65,7 +51,8 @@ const ShopRightBottom = () => {
          <div className='flex flex-wrap justify-between gap-y-7'>
           {allProducts?.slice(page * perPageItem-perPageItem, page * perPageItem).map((productItem)=>(
               <div className={`${GridLayout ? "w-full" : "w-[32%]"}`} key={productItem.id}>
-              <Product 
+             <Link to={`/product-details/${productItem.id}`}>
+             <Product 
               imga={productItem.thumbnail} 
               colorVariant={"White"}
               productName={productItem.title}
@@ -78,6 +65,7 @@ const ShopRightBottom = () => {
               />
               }
               />
+             </Link>
               </div>
           )) }          
          </div>

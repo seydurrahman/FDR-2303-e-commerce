@@ -7,7 +7,7 @@ const ApiStatus = {
 }
 
 const initialState= {
-    data: [],
+    data: {},
     status : ApiStatus.IDLE,
   }
 
@@ -26,13 +26,13 @@ const initialState= {
     })
 
 //  make a thunk function for getting data
-  export const FetcherProduct =()=>{
+  export const FetcherProduct =(apiUrl)=>{
       return async function GetProduct(dispatch, getState){
       try {
         dispatch(setStatus(ApiStatus.LOADING))
-        const response = await fetch("https://dummyjson.com/products")
+        const response = await fetch(apiUrl)
         const data = await response.json()
-        dispatch(setProducts(data.products))
+        dispatch(setProducts(data))
         dispatch(setStatus(ApiStatus.IDLE))
       } catch (error) {
         dispatch(setStatus(ApiStatus.ERROR))
