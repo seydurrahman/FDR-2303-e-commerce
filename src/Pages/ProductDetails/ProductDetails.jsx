@@ -24,8 +24,6 @@ useEffect(()=>{
 
 console.log(EachProduct);
 
-console.log((EachProduct.price)-(EachProduct.discountPercentage/100 * EachProduct.price));
-
 
   return (
     <div className=' py-16'>
@@ -49,7 +47,7 @@ console.log((EachProduct.price)-(EachProduct.discountPercentage/100 * EachProduc
         </div>
       </div>
       <div>
-        <ProductInfo/>
+        <ProductInfo productStock={EachProduct.stock}/>
       </div>
 
     </div>
