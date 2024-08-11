@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { IoMdStar } from 'react-icons/io'
 const Review = () => {
+    const [showDescription, setshowDescription]=useState("description")
   return (
     <>
     <div className='flex flex-col gap-y-5'>
         <div className='flex items-center gap-x-7'>
-            <h1 className='font-normal font-DMsans text-sm text-secondary_font_color'>Descriptions</h1>
-            <h2 className='font-bold font-DMsans text-md text-main_font_color'>Review (1)</h2>
+            <h1 className='font-normal font-DMsans text-sm text-secondary_font_color cursor-pointer' onClick={()=>setshowDescription("description")}>Descriptions</h1>
+            <h2 className='font-bold font-DMsans text-md text-main_font_color cursor-pointer' onClick={()=>setshowDescription("")}>Review (1)</h2>
         </div>
-
+        {showDescription === "description" ? (<div>
         <div>
             <p className='font-normal font-DMsans text-sm text-secondary_font_color'>1 review for product</p>
             <hr className='mt-4 opacity-75'/>
@@ -36,6 +37,53 @@ const Review = () => {
         </div>
         <hr className='mt-6 opacity-75'/>
         </div>
+        </div>): (
+            <div>
+                <ul class="max-w-md divide-y divide-gray-200 flex flex-col gap-y-4">
+    {[...new Array(4)].map((_,index)=>(
+        <li class="py-3 sm:pb-4">
+      <div class="flex items-center space-x-4 rtl:space-x-reverse">
+         <div class="flex-shrink-0">
+            <img class="w-8 h-8 rounded-full" src="https://ioflood.com/blog/wp-content/uploads/2023/10/java_logo_dice_random-300x300.jpg.webp" alt="Neil image"/>
+         </div>
+         <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+               Neil Sims
+            </p>
+            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+               email@flowbite.com
+            </p>
+         </div>
+         <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+            $320
+         </div>
+      </div>
+   </li>
+    ))}
+   
+   <li class="py-3 sm:py-4">
+      <div class="flex items-center space-x-4 rtl:space-x-reverse">
+         <div class="flex-shrink-0">
+            <img class="w-8 h-8 rounded-full" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScXWzC7IMjhrQUwTsLcDzKI3DZQpwyRBYnjw&s" alt="Neil image"/>
+         </div>
+         <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+               Bonnie Green
+            </p>
+            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+               email@flowbite.com
+            </p>
+         </div>
+         <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+            $3467
+         </div>
+      </div>
+   </li>
+
+</ul>
+            </div>
+)}
+        
     </div>
 
     {/* post review */}

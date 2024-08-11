@@ -16,7 +16,7 @@ const ProductInfo = ({productStock}) => {
   ]
   
   return (
-    <div className='mt-5 flex flex-col gap-y-10 divide-y divide-blue-200'>
+    <div className='mt-5 flex flex-col gap-y-10'>
 
         <div>
             <div className='flex items-center gap-x-4'>
@@ -28,6 +28,7 @@ const ProductInfo = ({productStock}) => {
                 <div className={`w-[20px] h-[20px] rounded-full hover:scale-150 transform-gpu cursor-pointer`} style={{background:color.colorCode}}></div>
                   ))}
             </div>
+            <hr className='mt-4 opacity-75'/>
         </div>
 
         {/* Size component */}
@@ -43,6 +44,7 @@ const ProductInfo = ({productStock}) => {
                 <option value="XL">XL</option>
                 </select>
             </div>
+            <hr className='mt-4 opacity-75'/>
        </div>
 
        {/* Size Component */}
@@ -59,11 +61,12 @@ const ProductInfo = ({productStock}) => {
                   <span className='cursor-pointer'><FaPlus/></span>
                 </div>
             </div>
+            <hr className='mt-4 opacity-75'/>
        </div>
 
       {/* Quantity component */}
 
-      {/* Status component */}
+      {/* Stock Status component */}
        <div>
             <div className='flex items-center gap-x-3'>
                 <h1 className='text-[16px] font-DMsans font-bold text-main_font_color'> 
@@ -73,9 +76,10 @@ const ProductInfo = ({productStock}) => {
                 <p>{productStock} in Stock</p>
               </div>
             </div>
+            <hr className='mt-4 opacity-75'/>
        </div>
 
-      {/* Status component */}
+      {/* Stock Status component */}
        
       {/* Wishlist and add to cart component */}
       <Flex className={"gap-x-5"}>

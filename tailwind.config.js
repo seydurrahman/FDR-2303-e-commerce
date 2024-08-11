@@ -19,5 +19,7 @@ export default {
       "footer_text_color":"var(--footer_text_color)",
     },},
   },
-  plugins: [],
+  plugins: [
+    require('flowbite/plugin')
+],
 }
