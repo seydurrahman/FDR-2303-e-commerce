@@ -33,14 +33,13 @@
     }
 }
 @layer components{
-    .menuItem{
-        font-size: 14px;
-        font-weight: 400;
-        font-family:var(--DMsans);
-        color: var(--secondary_font_color);
+    input,select{
+        --tw-ring-shadow : none !important
 }
 }
 
-/* .slick-dots ul .slick-active div{
-    border-right: 3px solid var(--main_font_color) !important;
-} */
+input[type="checkbox"]:checked{
+background-image:none !important ;
+color: var(--secondary_font_color);
+border:3x solid #e9e9e9
+}
