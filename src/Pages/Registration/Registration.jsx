@@ -20,6 +20,20 @@ const Registration = () => {
     subscribe1:false,
     subscribe2:false,
   })
+
+  const [userInfoError, setuserInfoError]=useState({
+    FirstNameError:"",
+    EmailAddressError:"",
+    TelephoneError:"",
+    Address1Error:"",
+    DistrictError:"",
+    passwordError:"",
+    RepeatpasswordError:"",
+    agreementError:false,
+    PasswordNotmatch:""
+    
+  })
+
   // handleuserInput functionality
   const handleuserInput = (e)=>{
     if (e.target.checked){
@@ -36,30 +50,62 @@ const Registration = () => {
     }
     
   }
-  console.log(userInfo);
 
   const handleSignUp = ()=>{
-    const {FirstName, EmailAddress, Telephone, Address1, password, Repeatpassword, agreement} = userInfo
+    const {FirstName, EmailAddress, Telephone, Address1, District, password, Repeatpassword, agreement} = userInfo
+   
     if (!FirstName){
-    console.log("First name missing");
+      setuserInfoError({
+        ...userInfoError,
+        FirstNameError:"First name missing"
+      })
     } else if (!EmailAddress){
-        console.log("Email missing");
+      setuserInfoError({
+        ...userInfoError,
+        EmailAddressError:"Email missing"
+      })
     } else if (!Telephone){
-    console.log("Telephone missing");
+      setuserInfoError({
+        ...userInfoError,
+        TelephoneError:"Telephone missing"
+      })
     } else if (!Address1){
-    console.log("Address1 missing"); 
+      setuserInfoError({
+        ...userInfoError,
+        Address1Error:"Address1 missing"
+      })
+    } else if (!District){
+      setuserInfoError({
+        ...userInfoError,
+        DistrictError:"District missing"
+      })
     } else if (!password){
-    console.log("Password missing");
+      setuserInfoError({
+        ...userInfoError,
+        passwordError:"Password missing"
+      })
     } else if (!Repeatpassword){
-    console.log("Repeatpassword missing");
-    } else if (!agreement){
-    console.log("Agreement missing");
+      setuserInfoError({
+        ...userInfoError,
+        RepeatpasswordError:"Repeatpassword missing"
+      })
+    } else if (password!==Repeatpassword){
+      setuserInfoError({
+        ...userInfoError,
+        PasswordNotmatch:"Password not match"
+      })
+    } else if (agreement == false){
+      setuserInfoError({
+        ...userInfoError,
+        agreementError:"Agreement missing"
+      })
     } else {
-    console.log("Everything ok");
+      alert("Everything is ok");
     
     }
   }
-
+  console.log(userInfoError);
+  
   return (
     <div className='py-20'>
         <div className='container'>
@@ -72,13 +118,30 @@ const Registration = () => {
                   <h1 className='text-[49px] font-bold text-main_font_color mb-5'>Your Personal Details</h1>
                   </div>
                     <div className='flex flex-wrap justify-between gap-y-8'>
-                    <SignUpInput className={" basis-2/5 py-4 border-0 border-b-2 border-b-secondary_bg_color"} inputType={"text"} placeHolder={"First Name"} labetTitle={"First Name"} inputId={"FirstName"} oninputChange={handleuserInput}/>
+                    <div className='basis-2/5'>
+                    <SignUpInput className={`${userInfoError.FirstNameError ? "border-0 border-b-2 border-red-400 py-4" :" basis-2/5 py-4 border-0 border-b-2 border-b-secondary_bg_color"}`} inputType={"text"} placeHolder={"First Name"} labetTitle={"First Name"} inputId={"FirstName"} oninputChange={handleuserInput}/>
+                    {userInfoError.FirstNameError && (
+                      <p className='text-red-400'>{userInfoError.FirstNameError}</p>
+                    )}
+                    </div>
                     
+                    <div className='basis-2/5'>
                     <SignUpInput className={"py-4 border-0 border-b-2 border-b-secondary_bg_color"} inputType={"text"} placeHolder={"Last Name"} labetTitle={"Last Name"} inputId={"LastName"} oninputChange={handleuserInput}/>
+                    </div>
                     
-                    <SignUpInput className={"py-4 border-0 border-b-2 border-b-secondary_bg_color"} inputType={"email"} placeHolder={"ska@gmail.com"} labetTitle={"Email Address"} inputId={"EmailAddress"} oninputChange={handleuserInput}/>
+                    <div className='basis-2/5'>
+                    <SignUpInput className={`${userInfoError.EmailAddressError ? "border-0 border-b-2 border-red-400 py-4" :" basis-2/5 py-4 border-0 border-b-2 border-b-secondary_bg_color"}`} inputType={"email"} placeHolder={"ska@gmail.com"} labetTitle={"Email Address"} inputId={"EmailAddress"} oninputChange={handleuserInput}/>
+                    {userInfoError.EmailAddressError && (
+                      <p className='text-red-400'>{userInfoError.EmailAddressError}</p>
+                    )}
+                    </div>
                     
-                    <SignUpInput className={"py-4 border-0 border-b-2 border-b-secondary_bg_color"} inputType={"number"} placeHolder={"Your phone number"} labetTitle={"Telephone"} inputId={"Telephone"} oninputChange={handleuserInput}/>
+                    <div className='basis-2/5'>
+                    <SignUpInput className={`${userInfoError.TelephoneError ? "border-0 border-b-2 border-red-400 py-4" :" basis-2/5 py-4 border-0 border-b-2 border-b-secondary_bg_color"}`} inputType={"number"} placeHolder={"Your phone number"} labetTitle={"Telephone"} inputId={"Telephone"} oninputChange={handleuserInput}/>
+                    {userInfoError.TelephoneError && (
+                      <p className='text-red-400'>{userInfoError.TelephoneError}</p>
+                    )}
+                    </div>
                     
                     </div>
                 </form>
@@ -92,7 +155,12 @@ const Registration = () => {
                   <h1 className='text-[49px] font-bold text-main_font_color mb-5'>New Customer</h1>
                   </div>
                     <div className='flex flex-wrap gap-y-8 gap-x-20'>
-                    <SignUpInput className={" basis-2/5 py-4 border-0 border-b-2 border-b-secondary_bg_color"} inputType={"text"} placeHolder={"R-14, H-11, Black-D Mirpur-6"} labetTitle={"Address-1"} inputId={"Address1"} oninputChange={handleuserInput}/>
+                    <div className='basis-2/5'>
+                    <SignUpInput className={`${userInfoError.Address1Error ? "border-0 border-b-2 border-red-400 py-4" :" basis-2/5 py-4 border-0 border-b-2 border-b-secondary_bg_color"}`} inputType={"text"} placeHolder={"R-14, H-11, Black-D Mirpur-6"} labetTitle={"Address-1"} inputId={"Address1"} oninputChange={handleuserInput}/>
+                    {userInfoError.Address1Error && (
+                      <p className='text-red-400'>{userInfoError.Address1Error}</p>
+                    )}
+                    </div>
                     
                     <SignUpInput className={"py-4 border-0 border-b-2 border-b-secondary_bg_color"} inputType={"text"} placeHolder={"Rupganj-narayanganj"} labetTitle={"Address-2"} inputId={"Address2"} oninputChange={handleuserInput}/>
                     
@@ -115,7 +183,7 @@ const Registration = () => {
                         </div>
                         <div className='basis-2/5'>
                         <h1 className='mb-3 text-base font-DMsans font-normal text-main_font_color'>District</h1>
-                        <select name="District" id="District" className='w-full border-0 border-b-2 border-b-secondary_bg_color' onChange={handleuserInput} >
+                        <select name="District" id="District" className={`${userInfoError.DistrictError ? "w-full border-0 border-b-2 border-b-red-500":"w-full border-0 border-b-2 border-b-secondary_bg_color"}`} onChange={handleuserInput} >
                           <option value="">Please select</option>
                           <option value="">Dhaka</option>
                           <option value="">Narayanganj</option>
@@ -123,6 +191,9 @@ const Registration = () => {
                           <option value="">joypurhat</option>
                           <option value="">Rajshahi</option>
                         </select>
+                        {userInfoError.DistrictError && (
+                      <p className='text-red-400'>{userInfoError.DistrictError}</p>
+                    )}
                         </div>
                     </div>
                 </form>
@@ -136,9 +207,19 @@ const Registration = () => {
                   <h1 className='text-[49px] font-bold text-main_font_color mb-5'>Your Password</h1>
                   </div>
                     <div className='flex flex-wrap justify-between gap-y-8'>
-                    <SignUpInput className={"py-4 border-0 border-b-2 border-b-secondary_bg_color"} inputType={"password"} placeHolder={"******"} labetTitle={"password"} inputId={"password"} oninputChange={handleuserInput}/>
+                    <div className='basis-2/5'>
+                    <SignUpInput className={`${userInfoError.passwordError ? "border-0 border-b-2 border-red-400 py-4" :" basis-2/5 py-4 border-0 border-b-2 border-b-secondary_bg_color"}`} inputType={"password"} placeHolder={"******"} labetTitle={"password"} inputId={"password"} oninputChange={handleuserInput}/>
+                    {userInfoError.passwordError && (
+                      <p className='text-red-400'>{userInfoError.passwordError}</p>
+                    )}
+                    </div>
                     
-                    <SignUpInput className={"py-4 border-0 border-b-2 border-b-secondary_bg_color"} inputType={"password"} placeHolder={"Repeat password"} labetTitle={"Repeat password"} inputId={"Repeatpassword"} oninputChange={handleuserInput}/>
+                    <div className='basis-2/5'>
+                    <SignUpInput className={`${userInfoError.RepeatpasswordError ? "border-0 border-b-2 border-red-400 py-4" :" basis-2/5 py-4 border-0 border-b-2 border-b-secondary_bg_color"}`} inputType={"password"} placeHolder={"Repeat password"} labetTitle={"Repeat password"} inputId={"Repeatpassword"} oninputChange={handleuserInput}/>
+                    {userInfoError.RepeatpasswordError && (
+                      <p className='text-red-400'>{userInfoError.RepeatpasswordError}</p>
+                    )}
+                    </div>
                     
                     </div>
                 </form>
@@ -148,7 +229,7 @@ const Registration = () => {
             {/* Check mark information */}
             <div className='flex items-center gap-x-3'>
               <input type="checkbox" id='agreement' name='agreement' onChange={handleuserInput} />
-              <p className='font-DMsans text-base font-normal text-secondary_font_color'>I have read and agree to the private policy</p>
+              <p className={`${userInfoError.agreementError ? "font-DMsans text-base font-normal text-red-500":"font-DMsans text-base font-normal text-secondary_font_color"}`}>{`${userInfoError.agreementError ? userInfoError.agreementError:"I have read and agree to the private policy"}`}</p>
             </div>
             <div className='flex items-center gap-x-3'>
               <p className='font-DMsans text-base font-normal text-secondary_font_color'>Subscribe Newsletter</p>
