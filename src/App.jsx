@@ -9,6 +9,9 @@ import {
 import Shop from "./Pages/Shop/Shop";
 import ProductDetails from "./Pages/ProductDetails/ProductDetails";
 import Registration from "./Pages/Registration/Registration";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     
@@ -23,10 +26,13 @@ const router = createBrowserRouter(
   
   function App() {
   return (
-  <RouterProvider router={router}>
-  <Home/>
-  </RouterProvider>
-  )
+    <>
+      <ToastContainer />
+      <RouterProvider router={router}>
+      <Home/>
+      </RouterProvider>
+    </>
+  )  
 }
 
 export default App
