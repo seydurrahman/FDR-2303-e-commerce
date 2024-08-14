@@ -62,44 +62,91 @@ const Registration = () => {
     } else if (!EmailAddress){
       setuserInfoError({
         ...userInfoError,
+        FirstNameError:"",
         EmailAddressError:"Email missing"
       })
     } else if (!Telephone){
       setuserInfoError({
         ...userInfoError,
+        FirstNameError:"",
+        EmailAddressError:"",
         TelephoneError:"Telephone missing"
       })
     } else if (!Address1){
       setuserInfoError({
         ...userInfoError,
+        FirstNameError:"",
+        EmailAddressError:"",
+        TelephoneError:"",
         Address1Error:"Address1 missing"
       })
     } else if (!District){
       setuserInfoError({
         ...userInfoError,
+        FirstNameError:"",
+        EmailAddressError:"",
+        TelephoneError:"",
+        Address1Error:"",
         DistrictError:"District missing"
       })
     } else if (!password){
       setuserInfoError({
         ...userInfoError,
+        FirstNameError:"",
+        EmailAddressError:"",
+        TelephoneError:"",
+        Address1Error:"",
+        DistrictError:"",
         passwordError:"Password missing"
       })
     } else if (!Repeatpassword){
       setuserInfoError({
-        ...userInfoError,
+        FirstNameError:"",
+        EmailAddressError:"",
+        TelephoneError:"",
+        Address1Error:"",
+        DistrictError:"",
+        passwordError:"",
         RepeatpasswordError:"Repeatpassword missing"
       })
     } else if (password!==Repeatpassword){
       setuserInfoError({
         ...userInfoError,
+        FirstNameError:"",
+        EmailAddressError:"",
+        TelephoneError:"",
+        Address1Error:"",
+        DistrictError:"",
+        passwordError:"",
+        RepeatpasswordError:"",
         PasswordNotmatch:"Password not match"
       })
     } else if (agreement == false){
       setuserInfoError({
         ...userInfoError,
+        FirstNameError:"",
+        EmailAddressError:"",
+        TelephoneError:"",
+        Address1Error:"",
+        DistrictError:"",
+        passwordError:"",
+        RepeatpasswordError:"",
+        PasswordNotmatch:"",
         agreementError:"Agreement missing"
       })
     } else {
+      setuserInfoError({
+        ...userInfoError,
+        FirstNameError:"",
+        EmailAddressError:"",
+        TelephoneError:"",
+        Address1Error:"",
+        DistrictError:"",
+        passwordError:"",
+        RepeatpasswordError:"",
+        PasswordNotmatch:"",
+        agreementError:"",
+      })
       alert("Everything is ok");
     
     }
@@ -220,7 +267,9 @@ const Registration = () => {
                       <p className='text-red-400'>{userInfoError.RepeatpasswordError}</p>
                     )}
                     </div>
-                    
+                    {userInfoError.PasswordNotmatch && (
+                        <p className='text-red-400'>{userInfoError.PasswordNotmatch}</p>
+                      )}
                     </div>
                 </form>
             </div>
