@@ -6,12 +6,17 @@ import ProductDetailsTop from '../../Component/ProductDetailsComponent/ProductDe
 import Loading from '../../Component/CommonComponent/Loading'
 import RatingStar from '../../Component/ProductDetailsComponent/RatingStar'
 import ProductInfo from '../../Component/ProductDetailsComponent/ProductInfo'
+import { addtoCart } from '../../Redux/AllSlice/AddtoCart/AddtoCartSlice'
+import { useParams, useNavigate } from 'react-router-dom'
 
 const ProductDetails = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [EachProduct, setEachProduct]= useState({})
+  const {productId} = useParams()
+
   useEffect(() => {
-    dispatch(FetcherProduct("https://dummyjson.com/products/1"))
+    dispatch(FetcherProduct(`https://dummyjson.com/products/${productId}`))
 },[])
 
 const {data, status} = useSelector((state)=>state.productt)
@@ -22,9 +27,11 @@ useEffect(()=>{
   }
 },[status.payload, data.payload])
 
-console.log(EachProduct);
-
-
+// handleCart
+const handleCart=()=>{
+  dispatch(addtoCart(EachProduct))
+  navigate ("/cart")
+}
   return (
     <div className=' py-16'>
       <div className='container'>
@@ -47,7 +54,7 @@ console.log(EachProduct);
         </div>
       </div>
       <div>
-        <ProductInfo productStock={EachProduct.stock}/>
+        <ProductInfo productStock={EachProduct.stock} onAddtoCart={handleCart}/>
       </div>
 
     </div>
