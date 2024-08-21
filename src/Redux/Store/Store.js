@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import ProductSlice from '../AllSlice/ProductSlice/ProductSlice'
-import AddtoCartSlice from '../AllSlice/AddtoCart/AddtoCartSlice'
+import AddtoCartSlice, {getTotal} from '../AllSlice/AddtoCart/AddtoCartSlice'
 import Cart from '../../Pages/Cart/Cart'
 
 export const store = configureStore({
@@ -9,3 +9,5 @@ export const store = configureStore({
     productt: ProductSlice,
   },
 })
+
+store.dispatch(getTotal());

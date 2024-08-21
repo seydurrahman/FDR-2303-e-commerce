@@ -1,56 +1,107 @@
-import React, { useState } from 'react'
-import Logo from "../../../assets/Logo.png"
-import Flex from '../../CommonComponent/Flex'
+import React, { useState } from "react";
+import Logo from "../../../assets/Logo.png";
+import Flex from "../../CommonComponent/Flex";
 import { FaBars } from "react-icons/fa6";
 import { RxCross2 } from "react-icons/rx";
+import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { isPending } from "@reduxjs/toolkit";
 
 const Header = () => {
-    const [isShow, setisShow]=useState(false)
+  const [isShow, setisShow] = useState(false);
 
-    // handleNavIcon functionality//
-    const HandleNavIcon=()=>{
-        setisShow(!isShow);
-    }
+  // handleNavIcon functionality//
+  const HandleNavIcon = () => {
+    setisShow(!isShow);
+  };
 
   return (
     <>
-    <div className=' py-8 bg-main_bg_color px-5 px-sm-0'>
+      <div className="px-sm-0 bg-main_bg_color px-5 py-8">
         <div className="container">
-           <Flex className=' justify-between items-center'>
-           <div>
-                <picture>
-                    <img src={Logo} alt="Logo.png" />
-                </picture>
+          <Flex className="items-center justify-between">
+            <div>
+              <picture>
+                <img src={Logo} alt="Logo.png" />
+              </picture>
             </div>
             <div>
-                <Flex className={`absolute flex-col sm:static sm:bg-main_bg_color sm:flex-row sm:gap-x-5 ${isShow ? "left-0 bg-green-200 w-full z-10 items-center top-[80px] transition-all":"left-[-100%] bg-gray-200 w-full z-10 items-center top-[80px]"}`}>
-                    <li>
-                        <a href="#" className="menuItem transition-all hover:text-main_font_color hover:font-bold">Home</a>
-                    </li>
-                    <li>
-                        <a href="#" className="menuItem transition-all hover:text-main_font_color hover:font-bold">Shop</a>
-                    </li>
-                    <li>
-                        <a href="#" className="menuItem transition-all hover:text-main_font_color hover:font-bold">About</a>
-                    </li>
-                    <li>
-                        <a href="#" className="menuItem transition-all hover:text-main_font_color hover:font-bold">Contacts</a>
-                    </li>
-                    <li>
-                        <a href="#" className="menuItem transition-all hover:text-main_font_color hover:font-bold">Journal</a>
-                    </li>
-                </Flex>
+              <Flex className={"gap-x-5"}> 
+                <ul
+                  className={`absolute md:static md:flex-row gap-x-5 ${isShow ? "left-10 top-20 z-10 w-full bg-green-400 text-center transition-all" : "left-[100%] top-20 z-10 text-white lg:text-black"}`}
+                >
+                  <NavLink
+                    to={"/"}
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "menuItem transition-all hover:font-bold hover:text-main_font_color"
+                        : isActive
+                          ? "menuItem text-green-400 transition-all"
+                          : ""
+                    }
+                  >
+                    Home
+                  </NavLink>
+                  <NavLink
+                    to={"/shop"}
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "menuItem transition-all hover:font-bold hover:text-main_font_color"
+                        : isActive
+                          ? "menuItem text-green-400 transition-all"
+                          : ""
+                    }
+                  >
+                    Shop
+                  </NavLink>
+                  <NavLink
+                    to={"/about"}
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "menuItem transition-all hover:font-bold hover:text-main_font_color"
+                        : isActive
+                          ? "menuItem text-green-400 transition-all"
+                          : ""
+                    }
+                  >
+                    About
+                  </NavLink>
+                  <NavLink
+                    to={"/contacts"}
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "menuItem transition-all hover:font-bold hover:text-main_font_color"
+                        : isActive
+                          ? "menuItem text-green-400 transition-all"
+                          : ""
+                    }
+                  >
+                    Contacts
+                  </NavLink>
+                  <NavLink
+                    to={"/journal"}
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "menuItem transition-all hover:font-bold hover:text-main_font_color"
+                        : isActive
+                          ? "menuItem text-green-400 transition-all"
+                          : ""
+                    }
+                  >
+                    Journal
+                  </NavLink>
+                </ul>
+              </Flex>
             </div>
-            <div className='cursor-pointer sm:hidden' onClick={HandleNavIcon}>
-                {isShow===true?<RxCross2/>:<FaBars/> }
-            </div>
-           </Flex>
+            <div></div>
+            {/* <div className="cursor-pointer sm:hidden" onClick={HandleNavIcon}>
+              {isShow === true ? <RxCross2 /> : <FaBars />}
+            </div> */}
+          </Flex>
         </div>
-    </div>
-    
-    
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

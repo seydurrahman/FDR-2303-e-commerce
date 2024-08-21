@@ -30,7 +30,6 @@ useEffect(()=>{
 // handleCart
 const handleCart=()=>{
   dispatch(addtoCart(EachProduct))
-  navigate ("/cart")
 }
   return (
     <div className=' py-16'>
