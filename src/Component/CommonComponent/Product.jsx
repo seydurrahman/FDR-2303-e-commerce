@@ -9,7 +9,7 @@ import { ProductData } from '../../../Data/Data';
 const Product = ({colorVariant,badge,imga,productName,productPrice}) => {
   return (
     <div className=' w-[98%]'>
-       <div className=' pb-6 relative overflow-hidden sm:w-[95%] md:w-full group cursor-pointer'>
+       <div className=' pb-6 relative overflow-hidden group cursor-pointer'>
         <div className=' absolute top-4 left-4 rounded-sm'>
              {badge}
         </div>

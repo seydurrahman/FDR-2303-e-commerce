@@ -57,15 +57,25 @@ const Banner = () => {
               }
             },
             {
+              breakpoint: 800,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2,
+                infinite: 2,
+                dots: true
+              }
+            },
+            {
               breakpoint: 600,
               settings: {
                 slidesToShow: 2,
                 slidesToScroll: 2,
-                initialSlide: 2
+                initialSlide: 2,
+                dots:false,
               }
             },
             {
-              breakpoint: 575,
+              breakpoint: 480,
               settings: {
                 slidesToShow: 1,
                 slidesToScroll: 1,
