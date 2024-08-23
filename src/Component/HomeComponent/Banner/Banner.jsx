@@ -59,9 +59,9 @@ const Banner = () => {
             {
               breakpoint: 800,
               settings: {
-                slidesToShow: 2,
-                slidesToScroll: 2,
-                infinite: 2,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                infinite: 1,
                 dots: true
               }
             },

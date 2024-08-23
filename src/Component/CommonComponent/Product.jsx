@@ -8,8 +8,8 @@ import { ProductData } from '../../../Data/Data';
 
 const Product = ({colorVariant,badge,imga,productName,productPrice}) => {
   return (
-    <div className='sm:px-10 w-full'>
-       <div className=' pb-6 relative overflow-hidden group cursor-pointer'>
+    <div className='sm:px-0 w-full'>
+       <div className=' pb-6 sm:w-[95%] relative overflow-hidden group cursor-pointer'>
         <div className=' absolute top-4 left-4 rounded-sm'>
              {badge}
         </div>

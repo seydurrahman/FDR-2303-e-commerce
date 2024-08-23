@@ -14,8 +14,12 @@ const Home = () => {
         <SaleInfo/>
         <NewArrival headdingTitle={"New Arrival"} pdata={ProductData}/>
         <NewArrival headdingTitle={"Our best selling"} pdata={BestSellingProduct}/>
+        <div className='py-5 lg:py-0'>
         <PhoneoftheYear/>
+        </div>
+        <div className='pb-10 lg:pb-0'>
         <NewArrival headdingTitle={"Special Offers"} pdata={SpecialOffers}/>
+        </div>
     </div>
   )
 }

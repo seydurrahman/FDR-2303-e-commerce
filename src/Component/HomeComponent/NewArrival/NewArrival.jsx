@@ -80,7 +80,7 @@ const settings = {
         slidesToShow: 3,
         slidesToScroll: 3,
         infinite: true,
-        dots: true,
+        dots: false,
       },
     },
     {
@@ -89,7 +89,7 @@ const settings = {
         slidesToShow: 2,
         slidesToScroll: 2,
         infinite: 2,
-        dots: true,
+        dots: false,
       },
     },
     {
@@ -116,7 +116,7 @@ const NewArrival = ({ headdingTitle, pdata }) => {
   const [Allproduct, setAllproduct] = useState(pdata);
   return (
     <>
-      <div className="sm:py-[80px] py-4 px-4">
+      <div className="xl:py-[100px] lg:py-16 py-4 px-4">
         <div className="container">
           <h1 className="mb-12 font-DMsans text-[29px] font-bold text-main_font_color">
             {headdingTitle ? headdingTitle : "Title Missing"}
