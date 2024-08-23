@@ -7,7 +7,7 @@ import { FaSquareInstagram } from "react-icons/fa6";
 const FooterBottom = () => {
   return (
     <>
-      <Flex className={" justify-between items-center"}>
+      <Flex className={"justify-center sm:justify-between md:justify-between lg:px-4 xl:px-0 items-center flex-wrap "}>
        <div className='py-10'>
        <Flex className={"items-center gap-x-6"}>
        <FaFacebookF/>

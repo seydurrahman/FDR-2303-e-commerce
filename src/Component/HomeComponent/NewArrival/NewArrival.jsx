@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
-import Product from '../../CommonComponent/Product'
-import Button from '../../CommonComponent/Button'
-import Flex from '../../CommonComponent/Flex'
+import React, { useState } from "react";
+import Product from "../../CommonComponent/Product";
+import Button from "../../CommonComponent/Button";
+import Flex from "../../CommonComponent/Flex";
 import Slider from "react-slick";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
-
 
 // SampleNextArrow//
 function SampleNextArrow(props) {
@@ -12,13 +11,26 @@ function SampleNextArrow(props) {
   return (
     <div
       className={className}
-      style={{ ...style, display: "block", background: "#979797", width:"40px", height:"40px", borderRadius:"50%", position:"absolute", left:"-20px", top:"50%", transform:"translateY(-100%)", zIndex:"2", cursor:"pointer",}}
+      style={{
+        ...style,
+        display: "block",
+        background: "#979797",
+        width: "40px",
+        height: "40px",
+        borderRadius: "50%",
+        position: "absolute",
+        left: "-20px",
+        top: "50%",
+        transform: "translateY(-100%)",
+        zIndex: "2",
+        cursor: "pointer",
+      }}
       onClick={onClick}
     >
-      <div className=' flex items-center justify-center h-full'>
-        <FaLongArrowAltLeft className=' text-white'/>
+      <div className="flex h-full items-center justify-center">
+        <FaLongArrowAltLeft className="text-white"/>
       </div>
-      </div>
+    </div>
   );
 }
 
@@ -29,24 +41,37 @@ function SamplePrevArrow(props) {
   return (
     <div
       className={className}
-      style={{ ...style, display: "block", background: "#979797",width:"40px", height:"40px", borderRadius:"50%", position:"absolute", right:"-15px", top:"50%", transform:"translateY(-100%)", zIndex:"2", cursor:"pointer", }}
+      style={{
+        ...style,
+        display: "block",
+        background: "#979797",
+        width: "40px",
+        height: "40px",
+        borderRadius: "50%",
+        position: "absolute",
+        right: "-20px",
+        top: "50%",
+        transform: "translateY(-100%)",
+        zIndex: "2",
+        cursor: "pointer",
+      }}
       onClick={onClick}
     >
-       <div className=' flex items-center justify-center h-full'>
-        <FaLongArrowAltRight className=' text-white'/>
+      <div className="flex h-full items-center justify-center">
+        <FaLongArrowAltRight className="text-white" />
       </div>
-      </div>
+    </div>
   );
 }
 
 const settings = {
-  dots:false,
+  dots: false,
   infinite: true,
   speed: 500,
   slidesToShow: 4,
   slidesToScroll: 4,
-  arrows:true,
-  prevArrow: <SampleNextArrow/>,
+  arrows: true,
+  prevArrow: <SampleNextArrow />,
   nextArrow: <SamplePrevArrow />,
   responsive: [
     {
@@ -55,8 +80,8 @@ const settings = {
         slidesToShow: 3,
         slidesToScroll: 3,
         infinite: true,
-        dots: true
-      }
+        dots: true,
+      },
     },
     {
       breakpoint: 800,
@@ -64,8 +89,8 @@ const settings = {
         slidesToShow: 2,
         slidesToScroll: 2,
         infinite: 2,
-        dots: true
-      }
+        dots: true,
+      },
     },
     {
       breakpoint: 600,
@@ -73,39 +98,53 @@ const settings = {
         slidesToShow: 2,
         slidesToScroll: 2,
         initialSlide: 2,
-        dots:false,
-      }
+        dots: false,
+      },
     },
     {
       breakpoint: 480,
       settings: {
         slidesToShow: 1,
         slidesToScroll: 1,
-        dots:false,
-      }
-    }
-  ]
+        dots: false,
+      },
+    },
+  ],
 };
 
-
-const NewArrival = ({headdingTitle,pdata}) => {
-  const [Allproduct, setAllproduct]=useState(pdata)
+const NewArrival = ({ headdingTitle, pdata }) => {
+  const [Allproduct, setAllproduct] = useState(pdata);
   return (
     <>
-    <div className=' py-[128px]'>
-      <div className="container">
-      <h1 className=' font-bold font-DMsans text-main_font_color text-[29px] mb-12'>{headdingTitle?headdingTitle:"Title Missing"}</h1>
+      <div className="sm:py-[80px] py-4 px-4">
+        <div className="container">
+          <h1 className="mb-12 font-DMsans text-[29px] font-bold text-main_font_color">
+            {headdingTitle ? headdingTitle : "Title Missing"}
+          </h1>
           <Slider {...settings}>
-          {Allproduct?.map((item)=>(
-         <div key={item.id}>
-                <Product imga={item.img} colorVariant={item.color===true?true:false} badge={item.badge==true?<Button title={item.badgeElement==true? "New":item.discountOffer} className={"py-2 px-8 bg-black text-white"}/>:null}/>
-        </div>
-      ))}
+            {Allproduct?.map((item) => (
+              <div key={item.id}>
+                <Product
+                  imga={item.img}
+                  colorVariant={item.color === true ? true : false}
+                  badge={
+                    item.badge == true ? (
+                      <Button
+                        title={
+                          item.badgeElement == true ? "New" : item.discountOffer
+                        }
+                        className={"bg-black px-8 py-2 text-white"}
+                      />
+                    ) : null
+                  }
+                />
+              </div>
+            ))}
           </Slider>
+        </div>
       </div>
-    </div>
     </>
-  )
-}
+  );
+};
 
-export default NewArrival
+export default NewArrival;

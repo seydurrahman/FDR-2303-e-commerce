@@ -8,16 +8,16 @@ import { ProductData } from '../../../Data/Data';
 
 const Product = ({colorVariant,badge,imga,productName,productPrice}) => {
   return (
-    <div className=' w-[98%]'>
+    <div className='sm:px-10 w-full'>
        <div className=' pb-6 relative overflow-hidden group cursor-pointer'>
         <div className=' absolute top-4 left-4 rounded-sm'>
              {badge}
         </div>
         
        <picture>
-            <img src={imga} alt={imga} className='w-full h-[290px] object-cover' />
+            <img src={imga} alt={imga} className='w-full h-full object-cover' />
         </picture>
-        <div className=" absolute bg-purple-100 w-full -bottom-[35%] left-0 transition-all group-hover:bottom-6">
+        <div className=" absolute bg-purple-100 w-full -bottom-[40%] left-0 transition-all group-hover:bottom-6">
             <div className=' flex justify-end flex-col items-end p-6'>
             <div>
             <Flex className={"gap-x-5 items-center"}> 
