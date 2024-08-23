@@ -6,51 +6,62 @@ import { FaUser } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa";
 import { FaChevronUp } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
-import cartItem from "../../../assets/Prod-12.png";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../../CommonComponent/Button.jsx";
 import { RxCross2 } from "react-icons/rx";
+import { useSelector, useDispatch } from "react-redux";
+import { getTotal } from "../../../Redux/AllSlice/AddtoCart/AddtoCartSlice.jsx";
 
 const MenuBar = () => {
   const [showCategories, setshowCategories] = useState(false);
   const [showAccount, setshowAccount] = useState(false);
   const [cart, setcart] = useState(false);
-  const MenuRef = useRef()
+  const dispatcH = useDispatch()
+  const MenuRef = useRef();
+  const navigate = useNavigate();
 
   // handlBar functionality //
   const handlCategory = () => {
-    setshowAccount(false)
+    setshowAccount(false);
     setshowCategories(!showCategories);
   };
 
   // handleAccount functionality
   const handlAccount = () => {
-    setcart(false)
-    setshowCategories(false)
+    setcart(false);
+    setshowCategories(false);
     setshowAccount(!showAccount);
   };
 
   // handleCart1 functionality //
 
   const handleCart1 = () => {
-    setshowCategories(false)
-    setshowAccount(false)
+    setshowCategories(false);
+    setshowAccount(false);
     setcart(!cart);
   };
 
   //  MenuRef functionality
-  console.log(MenuRef.current);
-  useEffect(()=>{
-    window.addEventListener("click",(e)=>{
-      if(!MenuRef.current.contains(e.target)){
-        setshowCategories(false)
-        setshowAccount(false)
+    useEffect(() => {
+    window.addEventListener("click", (e) => {
+      if (!MenuRef.current.contains(e.target)) {
+        setshowCategories(false);
+        setshowAccount(false);
         setcart(false);
       }
-      
-    })
-  })
-  
+    });
+  }, []);
+
+  // todo : Take all product from redux
+  const { TotalAmount, CartItem, TotalCartItem } = useSelector(
+    (state) => state.Cart,
+  );
+  const handleCartChange = () => {
+    navigate("/cart");
+  };
+  useEffect(()=>{
+    dispatcH(getTotal())
+  },[CartItem])
 
   return (
     <>
@@ -87,9 +98,6 @@ const MenuBar = () => {
                   </li>
                 </ul>
               </div>
-              <h2 className="menuItem hidden cursor-pointer text-main_font_color md:block">
-                Shop by Category
-              </h2>
             </Flex>
             <Search placeHolder="Search product" />
 
@@ -120,32 +128,53 @@ const MenuBar = () => {
               </div>
 
               <div className="cursor-pointer" onClick={handleCart1}>
-                <IoCartOutline className={`${cart && "text-green-600"}`} />
+                <div className="relative">
+                  <IoCartOutline className={`${cart && "text-green-600"}`} />
+                  <span class="absolute flex h-10 w-10">
+                    <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75"></span>
+                    <span class=" absolute left-3 -top-3 font-bold items-center justify-center inline-flex h-10 w-10 rounded-full bg-sky-500">
+                      {TotalAmount}
+                    </span>
+                  </span>
+                </div>
 
-                <div className={`absolute left-[-100%] transition-all top-[180px] z-10 w-full bg-black bg-secondary_bg_color text-white ${cart ? "left-[0%]" : null}`}>
-                  <div className="flex items-center justify-around py-5">
-                    <div className="h-[80px] w-[80px] bg-secondary_bg_color object-cover border-2 border-secondary_bg_color">
-                      <img src={cartItem} alt={cartItem} />
-                    </div>
-                    <div className="text-black font-DMsans font-bold text-sm">
-                      <h3>Black Smart Watch</h3>
-                      <span>$44.00</span>
-                    </div>
-                    <div className="text-main_font_color">
-                      <RxCross2 />
-                    </div>
+                <div
+                  className={`absolute left-[-100%] top-[180px] z-10 w-full bg-black bg-secondary_bg_color text-white transition-all lg:w-[20%] ${cart ? "left-[75%]" : null}`}
+                >
+                  <div className="h-[50vh] overflow-y-scroll scrollbar-thin scrollbar-track-secondary_bg_color scrollbar-thumb-sky-700">
+                    {CartItem?.map((item) => (
+                      <div className="flex items-center justify-around py-5">
+                        <div className="h-[80px] w-[80px] border-2 border-secondary_bg_color bg-secondary_bg_color object-cover">
+                          <img src={item.thumbnail} alt={item.thumbnail} />
+                        </div>
+                        <div className="font-DMsans text-sm font-bold text-black">
+                          <h3>
+                            {item.title
+                              ? `${item.title.slice(0, 15)}..`
+                              : "Title missing"}
+                          </h3>
+                          <span>
+                            {item.price ? `$ ${item.price}` : "$44.00"}
+                          </span>
+                        </div>
+                        <div className="text-main_font_color">
+                          <RxCross2 />
+                        </div>
+                      </div>
+                    ))}
                   </div>
 
                   <div className="bg-main_bg_color py-5">
-                    <h2 className="text-md font-DMsans font-normal text-secondary_font_color ml-4">
+                    <h2 className="text-md ml-4 font-DMsans font-normal text-secondary_font_color">
                       Subtotal:{" "}
                       <span className="ml-4 font-bold text-main_font_color">
-                        $44.00
+                        ${TotalCartItem}
                       </span>
                     </h2>
                     <div className="py-6">
                       <Flex className={"justify-around"}>
                         <Button
+                          onCartChange={handleCartChange}
                           title={"View cart"}
                           className={
                             "font-sm border-2 border-main_font_color px-10 py-4 font-DMsans font-bold text-black"
