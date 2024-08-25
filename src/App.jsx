@@ -11,15 +11,17 @@ import ProductDetails from "./Pages/ProductDetails/ProductDetails";
 import Registration from "./Pages/Registration/Registration";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Cart from "./Pages/Cart/Cart"
+import Cart from "./Pages/Cart/Cart";
+import Contact from "./Pages/Contact/Contact";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} />
       <Route path="/shop" element={<Shop />} />
+      <Route path="/contact" element={<Contact />} />
       <Route path="/product-details/:productId" element={<ProductDetails />} />,
-      <Route path="/cart" element={<Cart/>}/>
+      <Route path="/cart" element={<Cart />} />
       <Route path="/registration" element={<Registration />}></Route>,
     </Route>,
   ),
