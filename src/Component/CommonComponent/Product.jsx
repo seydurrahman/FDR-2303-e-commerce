@@ -14,10 +14,9 @@ const Product = ({
   productName,
   productPrice,
   productId,
+  onaddToCart,
 }) => {
-  const handleAddToCart = (event) => {
-    event.stopPropagationS();
-  };
+ 
   return (
     <div className="w-full sm:px-0">
       <div className="group relative cursor-pointer overflow-hidden pb-6 sm:w-[95%]">
@@ -46,7 +45,7 @@ const Product = ({
                 </span>
               </Flex>
             </div>
-            <div onClick={handleAddToCart}>
+            <div onClick={onaddToCart}>
               <Flex className={"items-center gap-x-2"}>
                 <h5>Add to cart</h5>
                 <span>

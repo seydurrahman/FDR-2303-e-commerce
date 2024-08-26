@@ -10,16 +10,17 @@ import {
   ProductDecrement,
   getTotal,
 } from "../../Redux/AllSlice/AddtoCart/AddtoCartSlice";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const { CartItem, TotalAmount , TotalCartItem } = useSelector(
+  const { CartItem, TotalAmount, TotalCartItem } = useSelector(
     (state) => state.Cart,
   );
-  
-  useEffect(()=>{
-    dispatch(getTotal())
-  },[dispatch, CartItem])
+
+  useEffect(() => {
+    dispatch(getTotal());
+  }, [dispatch, CartItem]);
 
   // todo: handleRemove functionality added
   // @parmas: ({item})
@@ -171,9 +172,11 @@ const Cart = () => {
           </div>
 
           <div className="text-end">
-            <button className="rounded-sm bg-main_font_color px-[16px] py-[32px] font-DMsans text-xl text-white">
-              Proceed to Checkout
-            </button>
+            <Link to={"/registration"}>
+              <button className="rounded-sm bg-main_font_color px-[16px] py-[32px] font-DMsans text-xl text-white">
+                Proceed to Checkout
+              </button>
+            </Link>
           </div>
         </div>
       </div>

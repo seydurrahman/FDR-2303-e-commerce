@@ -9,9 +9,8 @@ import {
 } from "react-icons/md";
 import { FetcherProduct } from "../../../Redux/AllSlice/ProductSlice/ProductSlice.js";
 import { useSelector, useDispatch } from "react-redux";
-import { data } from "autoprefixer";
-import { Link } from "react-router-dom";
 import Loading from "../Loading.jsx";
+import { addtoCart } from "../../../Redux/AllSlice/AddtoCart/AddtoCartSlice.jsx";
 
 const ShopRightBottom = () => {
   const dispatch = useDispatch();
@@ -43,6 +42,13 @@ const ShopRightBottom = () => {
     }
   };
 
+  // todo: handleAddtoCart function
+  //  params: ({item})
+
+  const handleAddtoCart = (item) => {
+    dispatch(addtoCart(item));
+  };
+
   return (
     <>
       <div className="mt-10">
@@ -64,6 +70,7 @@ const ShopRightBottom = () => {
                       key={productItem.id}
                     >
                       <Product
+                        onaddToCart={() => handleAddtoCart(productItem)}
                         productId={productItem.id}
                         imga={productItem.thumbnail}
                         colorVariant={"White"}

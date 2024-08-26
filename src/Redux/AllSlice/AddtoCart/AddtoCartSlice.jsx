@@ -112,18 +112,17 @@ export const addtoSlice = createSlice({
           const { price, cartQuantity } = cartItem;
           const totalCartPrice = cartQuantity * price;
 
-          totalCart.totalAmount += Math.round(totalCartPrice)
-          totalCart.totaItem += cartQuantity
-          return totalCart
-          
+          totalCart.totalAmount += Math.round(totalCartPrice);
+          totalCart.totaItem += cartQuantity;
+          return totalCart;
         },
         {
           totalAmount: 0,
           totaItem: 0,
         },
       );
-      state.TotalCartItem = totalCart.totalAmount
-      state.TotalAmount = totalCart.totaItem
+      state.TotalCartItem = totalCart.totalAmount;
+      state.TotalAmount = totalCart.totaItem;
     },
   },
 });

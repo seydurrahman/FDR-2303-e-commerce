@@ -10,15 +10,48 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "../../CommonComponent/Button.jsx";
 import { RxCross2 } from "react-icons/rx";
 import { useSelector, useDispatch } from "react-redux";
-import { getTotal } from "../../../Redux/AllSlice/AddtoCart/AddtoCartSlice.jsx";
+import { getTotal, RemoveItemCart } from "../../../Redux/AllSlice/AddtoCart/AddtoCartSlice.jsx";
+import { TbRuler2Off } from "react-icons/tb";
 
 const MenuBar = () => {
   const [showCategories, setshowCategories] = useState(false);
   const [showAccount, setshowAccount] = useState(false);
   const [cart, setcart] = useState(false);
-  const dispatcH = useDispatch()
+  const dispatcH = useDispatch();
   const MenuRef = useRef();
+  const CartRef = useRef();
   const navigate = useNavigate();
+
+  //  MenuRef functionality
+  useEffect(() => {
+    window.addEventListener("click", (e) => {
+      if (!MenuRef.current.contains(e.target)) {
+        setshowCategories(false);
+        setshowAccount(false);
+        setcart(false);
+      }
+      if (CartRef.current.contains(e.target)) {
+        setcart(true);
+      }
+    });
+    return () => {
+      window.addEventListener("click", () => {});
+    };
+  }, []);
+
+  // todo : Take all product from redux
+  const { TotalAmount, CartItem, TotalCartItem } = useSelector(
+    (state) => state.Cart,
+  );
+  const handleCartChange = () => {
+    navigate("/cart");
+  };
+  useEffect(() => {
+    return ()=>{
+      dispatcH(getTotal());
+    }
+  }, [CartItem]);
+
 
   // handlBar functionality //
   const handlCategory = () => {
@@ -41,27 +74,13 @@ const MenuBar = () => {
     setcart(!cart);
   };
 
-  //  MenuRef functionality
-    useEffect(() => {
-    window.addEventListener("click", (e) => {
-      if (!MenuRef.current.contains(e.target)) {
-        setshowCategories(false);
-        setshowAccount(false);
-        setcart(false);
-      }
-    });
-  }, []);
+    
+  // .... todo: handleCartItem function
+  // params: ({items: object})
 
-  // todo : Take all product from redux
-  const { TotalAmount, CartItem, TotalCartItem } = useSelector(
-    (state) => state.Cart,
-  );
-  const handleCartChange = () => {
-    navigate("/cart");
+  const handleCartItem = (item) => {
+    dispatcH(RemoveItemCart(item))
   };
-  useEffect(()=>{
-    dispatcH(getTotal())
-  },[CartItem])
 
   return (
     <>
@@ -132,7 +151,7 @@ const MenuBar = () => {
                   <IoCartOutline className={`${cart && "text-green-600"}`} />
                   <span class="absolute flex h-10 w-10">
                     <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75"></span>
-                    <span class=" absolute left-3 -top-3 font-bold items-center justify-center inline-flex h-10 w-10 rounded-full bg-sky-500">
+                    <span class="absolute -top-3 left-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-sky-500 font-bold">
                       {TotalAmount}
                     </span>
                   </span>
@@ -141,7 +160,10 @@ const MenuBar = () => {
                 <div
                   className={`absolute left-[-100%] top-[180px] z-10 w-full bg-black bg-secondary_bg_color text-white transition-all lg:w-[20%] ${cart ? "left-[75%]" : null}`}
                 >
-                  <div className="h-[50vh] overflow-y-scroll scrollbar-thin scrollbar-track-secondary_bg_color scrollbar-thumb-sky-700">
+                  <div
+                    ref={CartRef}
+                    className="h-[50vh] overflow-y-scroll scrollbar-thin scrollbar-track-secondary_bg_color scrollbar-thumb-sky-700"
+                  >
                     {CartItem?.map((item) => (
                       <div className="flex items-center justify-around py-5">
                         <div className="h-[80px] w-[80px] border-2 border-secondary_bg_color bg-secondary_bg_color object-cover">
@@ -157,7 +179,10 @@ const MenuBar = () => {
                             {item.price ? `$ ${item.price}` : "$44.00"}
                           </span>
                         </div>
-                        <div className="text-main_font_color">
+                        <div
+                          className="text-main_font_color"
+                          onClick={() => handleCartItem(item)}
+                        >
                           <RxCross2 />
                         </div>
                       </div>
