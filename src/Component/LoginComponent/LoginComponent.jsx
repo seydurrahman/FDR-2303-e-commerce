@@ -1,10 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 import Login from "../../assets/Login.gif";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { errorMessage, successMessage, checkEmail } from "../../../Utils/Utils";
+import { DNA } from "react-loader-spinner";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
+import { SiTrueup } from "react-icons/si";
+
 const LoginComponent = () => {
+  const auth = getAuth();
+  const navigate = useNavigate();
+  const [loading, setloading] = useState(false);
+  const [loginUser, setloginUser] = useState({
+    EmailAddress: "",
+    password: "",
+  });
+  const handleloginUserInput = (e) => {
+    setloginUser({
+      ...loginUser,
+      [e.target.id]: e.target.value,
+    });
+  };
+  const HandleLogin = () => {
+    const { EmailAddress, password } = loginUser;
+    if (!EmailAddress || !checkEmail(EmailAddress)) {
+      errorMessage("Your credential is not valid", "top-center");
+    } else if (!password) {
+      errorMessage("Your password is not valid", "top-center");
+    } else {
+      setloading(true);
+      signInWithEmailAndPassword(auth, EmailAddress, password)
+        .then((userInfo) => {
+          onAuthStateChanged(auth, (user) => {
+            if (user.emailVerified) {
+              navigate("/checkout");
+            } else {
+              errorMessage(
+                `${user.EmailAddress} is not Verified Please check your Email`,
+                "top-center",
+              );
+            }
+          });
+        })
+        .catch((err) => {
+          errorMessage(err.code, "top-center");
+        })
+        .finally(() => {
+          setloading(false);
+        });
+    }
+  };
+
   return (
     <div>
-      <section className="flex items-center justify-center">
+      <section className="flex items-center">
         <div className="hidden w-full md:w-1/2 lg:block xl:w-2/4">
           <img src={Login} alt={Login} />
         </div>
@@ -15,7 +67,7 @@ const LoginComponent = () => {
               Log in to your account
             </h1>
 
-            <form className="mt-6" onSubmit={(e)=>e.preventDefault()}>
+            <form className="mt-6" onSubmit={(e) => e.preventDefault()}>
               <div>
                 <label className="block text-gray-700">Email Address</label>
                 <input
@@ -53,10 +105,22 @@ const LoginComponent = () => {
               </div>
 
               <button
+                onClick={HandleLogin}
                 type="submit"
                 className="mt-6 block w-full rounded-lg bg-indigo-500 px-4 py-3 font-semibold text-white hover:bg-indigo-400 focus:bg-indigo-400"
               >
-                Log In
+                {loading ? (
+                  <span className="flex justify-center">
+                    <DNA
+                      visible={true}
+                      height="50"
+                      width="100"
+                      ariaLabel="dna-loading"
+                    />
+                  </span>
+                ) : (
+                  "Log In"
+                )}
               </button>
             </form>
 

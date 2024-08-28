@@ -10,7 +10,10 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "../../CommonComponent/Button.jsx";
 import { RxCross2 } from "react-icons/rx";
 import { useSelector, useDispatch } from "react-redux";
-import { getTotal, RemoveItemCart } from "../../../Redux/AllSlice/AddtoCart/AddtoCartSlice.jsx";
+import {
+  getTotal,
+  RemoveItemCart,
+} from "../../../Redux/AllSlice/AddtoCart/AddtoCartSlice.jsx";
 import { TbRuler2Off } from "react-icons/tb";
 
 const MenuBar = () => {
@@ -47,11 +50,10 @@ const MenuBar = () => {
     navigate("/cart");
   };
   useEffect(() => {
-    return ()=>{
+    return () => {
       dispatcH(getTotal());
-    }
+    };
   }, [CartItem]);
-
 
   // handlBar functionality //
   const handlCategory = () => {
@@ -74,12 +76,35 @@ const MenuBar = () => {
     setcart(!cart);
   };
 
-    
   // .... todo: handleCartItem function
   // params: ({items: object})
 
   const handleCartItem = (item) => {
-    dispatcH(RemoveItemCart(item))
+    dispatcH(RemoveItemCart(item));
+  };
+
+  const [allProducts, setallProducts] = useState([]);
+  //  todo : take a product data from store
+
+  const { data, status } = useSelector((state) => state.productt);
+
+  useEffect(() => {
+    if (status.payload === "IDLE") {
+      setallProducts(data.payload.products);
+    }
+  }, [status.payload, data.payload]);
+
+  //  handleSearch function
+  const handleSearch = (event) => {
+    const { value } = event.target;
+    if (value) {
+      const searchResult = allProducts.filter((productt) =>
+        productt.title.toLowerCase().includes(value.toLowerCase()),
+      );
+      console.log(searchResult);
+    } else {
+      console.log("no search result");
+    }
   };
 
   return (
@@ -118,7 +143,7 @@ const MenuBar = () => {
                 </ul>
               </div>
             </Flex>
-            <Search placeHolder="Search product" />
+            <Search placeHolder="Search product" onSearch={handleSearch} />
 
             <Flex className={"gap-x-2 sm:gap-x-5"}>
               <div onClick={handlAccount}>

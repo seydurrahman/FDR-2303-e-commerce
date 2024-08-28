@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import RegistrationTop from "../../Component/RegistrationComponent/RegistrationTop/RegistrationTop";
 import SignUpInput from "../../Component/RegistrationComponent/SignUpInput/SignUpInput";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { toast, Bounce } from "react-toastify";
+import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../../Firebase/FirebaseConfig";
+import { successMessage, errorMessage } from "../../../Utils/Utils";
+import { useNavigate } from "react-router-dom";
+
 
 const Registration = () => {
+  const navigate = useNavigate()
   const auth = getAuth();
   const [loading, setloading] = useState(false);
   const [userInfo, setuserInfo] = useState({
@@ -155,38 +158,25 @@ const Registration = () => {
         userInfo.password,
       )
         .then((uderCrediential) => {
-          toast.info(`${userInfo.FirstName} Registration done`, {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-          });
+          successMessage(`${userInfo.FirstName} Registration done`)
         })
         .then(() => {
-          addDoc(collection(db, "users"), userInfo).then((userCredential) => {
-            console.log(userCredential);
-          }).catch((err)=>{
-            console.log(err);
-            
-          })
+          addDoc(collection(db, "users/"), userInfo)
+            .then((userCredential) => {
+              sendEmailVerification(auth.currentUser).then(()=>{
+                successMessage(`${userInfo.FirstName} Check your email inbox`)
+              })
+            }).then(()=>{
+              setTimeout(()=>{
+                navigate("/login")
+              },3000)
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         })
         .catch((err) => {
-          toast.error(`${err.code}`, {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-          });
+          errorMessage(`${err.code}`, "top-center")
         })
         .finally(() => {
           setloading(false);
