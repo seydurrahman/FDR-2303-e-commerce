@@ -2,7 +2,7 @@ import React from "react";
 import Flex from "../CommonComponent/Flex";
 import { FcSearch } from "react-icons/fc";
 
-const Search = ({ placeHolder, onSearch }) => {
+const Search = ({ placeHolder, onSearch, searchInput}) => {
   return (
     <>
       <div className="relative">
@@ -11,6 +11,7 @@ const Search = ({ placeHolder, onSearch }) => {
             type="text"
             className="w-[200px] sm:w-[350px] md:w-[400px] lg:w-[700px] py-5 px-5 rounded-sm "
             placeholder={placeHolder}
+            value={searchInput}
             onChange={onSearch}
           />
 
