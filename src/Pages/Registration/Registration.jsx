@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import RegistrationTop from "../../Component/RegistrationComponent/RegistrationTop/RegistrationTop";
 import SignUpInput from "../../Component/RegistrationComponent/SignUpInput/SignUpInput";
-import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../../Firebase/FirebaseConfig";
 import { successMessage, errorMessage } from "../../../Utils/Utils";
-import { useNavigate } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 
 const Registration = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const auth = getAuth();
   const [loading, setloading] = useState(false);
   const [userInfo, setuserInfo] = useState({
@@ -150,33 +153,36 @@ const Registration = () => {
         agreementError: "Agreement missing",
       });
     } else {
-      setloading(true);
       // create user with firebase createUserWithEmailAndPassword
+      setloading(true);
       createUserWithEmailAndPassword(
         auth,
         userInfo.EmailAddress,
         userInfo.password,
       )
         .then((uderCrediential) => {
-          successMessage(`${userInfo.FirstName} Registration done`)
+          
+          successMessage(`${userInfo.FirstName} Registration done`);
         })
         .then(() => {
           addDoc(collection(db, "users/"), userInfo)
             .then((userCredential) => {
-              sendEmailVerification(auth.currentUser).then(()=>{
-                successMessage(`${userInfo.FirstName} Check your email inbox`)
-              })
-            }).then(()=>{
-              setTimeout(()=>{
-                navigate("/login")
-              },3000)
+              // navigate("/login")
+              sendEmailVerification(auth.currentUser).then(() => {
+                successMessage(`${userInfo.FirstName} Check your email inbox`);
+              });
+            })
+            .then(() => {
+              setTimeout(() => {
+                navigate("/login");
+              }, 3000);
             })
             .catch((err) => {
               console.log(err);
             });
         })
         .catch((err) => {
-          errorMessage(`${err.code}`, "top-center")
+          errorMessage(`${err.code}`, "top-center");
         })
         .finally(() => {
           setloading(false);
@@ -473,6 +479,9 @@ const Registration = () => {
               className={`${userInfoError.agreementError ? "font-DMsans text-base font-normal text-red-500" : "font-DMsans text-base font-normal text-secondary_font_color"}`}
             >{`${userInfoError.agreementError ? userInfoError.agreementError : "I have read and agree to the private policy"}`}</p>
           </div>
+          <Link to={"/login"}>
+            <p className="font-DMsans text-base font-normal text-secondary_font_color underline hover:text-blue-600">I have an already account</p>
+          </Link>
           <div className="flex items-center gap-x-3">
             <p className="font-DMsans text-base font-normal text-secondary_font_color">
               Subscribe Newsletter

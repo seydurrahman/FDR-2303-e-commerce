@@ -15,7 +15,7 @@ function checkEmail(email = "seydurrahman@gmail.com") {
 function successMessage(
   Message = "seydur",
   position = "top-right",
-  delay = 4000,
+  delay = 3000,
 ) {
   toast.success(Message, {
     position: position,

@@ -15,7 +15,7 @@ const LoginComponent = () => {
   const navigate = useNavigate();
   const [loading, setloading] = useState(false);
   const [loginUser, setloginUser] = useState({
-    EmailAddress: "",
+    email: "",
     password: "",
   });
   const handleloginUserInput = (e) => {
@@ -24,22 +24,25 @@ const LoginComponent = () => {
       [e.target.id]: e.target.value,
     });
   };
+  
+  
   const HandleLogin = () => {
-    const { EmailAddress, password } = loginUser;
-    if (!EmailAddress || !checkEmail(EmailAddress)) {
+    const { email, password } = loginUser;
+    if (!email || !checkEmail(email)) {
       errorMessage("Your credential is not valid", "top-center");
     } else if (!password) {
       errorMessage("Your password is not valid", "top-center");
     } else {
+      successMessage("Everything is ok")
       setloading(true);
-      signInWithEmailAndPassword(auth, EmailAddress, password)
+      signInWithEmailAndPassword(auth, email, password)
         .then((userInfo) => {
           onAuthStateChanged(auth, (user) => {
             if (user.emailVerified) {
               navigate("/checkout");
             } else {
               errorMessage(
-                `${user.EmailAddress} is not Verified Please check your Email`,
+                `${user.email} is not Verified Please check your Email`,
                 "top-center",
               );
             }
@@ -72,13 +75,14 @@ const LoginComponent = () => {
                 <label className="block text-gray-700">Email Address</label>
                 <input
                   type="email"
-                  name=""
-                  id=""
+                  name="email"
+                  id="email"
                   placeholder="Enter Email Address"
                   className="mt-2 w-full rounded-lg border bg-gray-200 px-4 py-3 focus:border-blue-500 focus:bg-white focus:outline-none"
                   autofocus
                   autocomplete
                   required
+                  onChange={handleloginUserInput}
                 />
               </div>
 
@@ -86,12 +90,13 @@ const LoginComponent = () => {
                 <label className="block text-gray-700">Password</label>
                 <input
                   type="password"
-                  name=""
-                  id=""
+                  name="password"
+                  id="password"
                   placeholder="Enter Password"
                   minlength="6"
                   className="mt-2 w-full rounded-lg border bg-gray-200 px-4 py-3 focus:border-blue-500 focus:bg-white focus:outline-none"
                   required
+                  onChange={handleloginUserInput}
                 />
               </div>
 

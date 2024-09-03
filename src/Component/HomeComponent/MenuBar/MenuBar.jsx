@@ -24,6 +24,7 @@ const MenuBar = () => {
   const dispatcH = useDispatch();
   const MenuRef = useRef();
   const CartRef = useRef();
+  const accountRef = useRef();
   const navigate = useNavigate();
 
   //  MenuRef functionality
@@ -36,6 +37,9 @@ const MenuBar = () => {
       }
       if (CartRef.current.contains(e.target)) {
         setcart(true);
+      }
+      if (accountRef.current.contains(e.target)) {
+        setshowAccount(true);
       }
     });
     return () => {
@@ -187,18 +191,18 @@ const MenuBar = () => {
                   </div>
                   <div>{showAccount ? <FaChevronUp /> : <FaChevronDown />}</div>
                 </Flex>
-                {showAccount && (
-                  <div>
-                    <ul className="absolute left-0 top-[185px] z-10 w-full divide-y divide-solid bg-gray-700 py-5 text-center text-white sm:w-[200px]">
-                      <li className="py-4">
-                        <Link to={"/"}>My Account</Link>
-                      </li>
-                      <li className="PY-4">
-                        <Link to={"/"}>Log Out</Link>
-                      </li>
-                    </ul>
-                  </div>
-                )}
+                <div ref={accountRef}>
+                  <ul
+                    className={`absolute left-[-100%] top-[110px] z-10 w-full divide-y divide-[#ffffff23] bg-black py-4 text-center text-white transition-all sm:w-[200px] ${showAccount ? "left-[83%]" : null}`}
+                  >
+                    <li className="py-4">
+                      <Link to={"/"}>My Account</Link>
+                    </li>
+                    <li className="PY-4">
+                      <Link to={"/"}>Log Out</Link>
+                    </li>
+                  </ul>
+                </div>
               </div>
 
               <div className="cursor-pointer" onClick={handleCart1}>
