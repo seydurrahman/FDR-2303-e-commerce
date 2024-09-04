@@ -10,6 +10,9 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "../../CommonComponent/Button.jsx";
 import { RxCross2 } from "react-icons/rx";
 import { useSelector, useDispatch } from "react-redux";
+import { getAuth, signOut } from "firebase/auth";
+
+
 import {
   getTotal,
   RemoveItemCart,
@@ -21,6 +24,7 @@ const MenuBar = () => {
   const [showCategories, setshowCategories] = useState(false);
   const [showAccount, setshowAccount] = useState(false);
   const [cart, setcart] = useState(false);
+  const auth = getAuth()
   const dispatcH = useDispatch();
   const MenuRef = useRef();
   const CartRef = useRef();
@@ -40,6 +44,7 @@ const MenuBar = () => {
       }
       if (accountRef.current.contains(e.target)) {
         setshowAccount(true);
+        setcart(false);
       }
     });
     return () => {
@@ -123,6 +128,16 @@ const MenuBar = () => {
     navigate(`/product-details/${productId}`);
   };
 
+  // handleLogout function
+
+  const handleLogout = ()=>{
+    signOut(auth).then(() => {
+      navigate("/login")
+      setshowAccount(false)
+    }).catch((error) => {
+      // An error happened.
+    });
+  }
   return (
     <>
       <div
@@ -198,8 +213,8 @@ const MenuBar = () => {
                     <li className="py-4">
                       <Link to={"/"}>My Account</Link>
                     </li>
-                    <li className="PY-4">
-                      <Link to={"/"}>Log Out</Link>
+                    <li className="PY-4 cursor-pointer" onClick={handleLogout}>
+                      Log Out
                     </li>
                   </ul>
                 </div>

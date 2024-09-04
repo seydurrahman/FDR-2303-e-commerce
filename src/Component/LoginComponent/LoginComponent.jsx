@@ -24,8 +24,7 @@ const LoginComponent = () => {
       [e.target.id]: e.target.value,
     });
   };
-  
-  
+
   const HandleLogin = () => {
     const { email, password } = loginUser;
     if (!email || !checkEmail(email)) {
@@ -33,27 +32,32 @@ const LoginComponent = () => {
     } else if (!password) {
       errorMessage("Your password is not valid", "top-center");
     } else {
-      successMessage("Everything is ok")
-      setloading(true);
+      // setloading(true);
       signInWithEmailAndPassword(auth, email, password)
         .then((userInfo) => {
-          onAuthStateChanged(auth, (user) => {
-            if (user.emailVerified) {
-              navigate("/checkout");
-            } else {
-              errorMessage(
-                `${user.email} is not Verified Please check your Email`,
-                "top-center",
-              );
-            }
-          });
+          console.log(userInfo);
+          successMessage("Everything is ok")
         })
+        // .then((userInfo) => {
+        //   console.log(userInfo);
+        //   successMessage("Everything is ok")
+        //     onAuthStateChanged(auth, (user) => {
+        //       if (user.emailVerified) {
+        //         navigate("/checkout");
+        //       } else {
+        //         errorMessage(
+        //           `${user.email} is not Verified Please check your Email`,
+        //           "top-center",
+        //         );
+        //       }
+        //     });
+        //   })
         .catch((err) => {
-          errorMessage(err.code, "top-center");
-        })
-        .finally(() => {
-          setloading(false);
+          errorMessage(err.message, "top-center");
         });
+      // .finally(() => {
+      //   setloading(false);
+      // });
     }
   };
 
